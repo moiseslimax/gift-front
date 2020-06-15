@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { Button, FormField, Form, TextInput, Box, Select, RangeInput } from 'grommet';
-
+import { useDispatch } from 'react-redux';
+import { SET_ERROR } from '../../store/reducers/types';
 //styled components
 import { Container, BigText } from './styled.gifted';
 
 function Gifted() {
-  const options = ['Feminino', 'Masculino', 'lgbt+', 'Isso realmente importa?'];
+  const dispatch = useDispatch();
+  const optionsGender = ['Feminino', 'Masculino', 'lgbt+', 'Isso realmente importa?'];
+  const optionsBond = ['Amigo(a)', 'Primo(a)', 'Namorado(a)', 'Mãe', 'Pai', 'Conhecido'];
   const [age, setAge] = useState(50);
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
+  const [bond, setbond] = useState('');
 
   function submitGiftedData() {
     let gifted = {
@@ -18,7 +22,14 @@ function Gifted() {
     };
 
     //TODO Dispatch gifted
+    let reducerError = {
+      page: 'gifted',
+      error: {
+        message: 'error',
+      },
+    };
 
+    dispatch({ type: SET_ERROR, payload: reducerError });
     console.log(gifted);
   }
 
@@ -47,9 +58,19 @@ function Gifted() {
             id="select"
             name="select"
             placeholder="Selecione um genero"
-            options={options}
+            options={optionsGender}
             value={gender}
-            onChange={({ option }) => setGender(option)}
+            onChange={({ optionsGender }) => setGender(optionsGender)}
+          />
+        </FormField>
+        <FormField name="gender" label="O que essa pessoa é para você?">
+          <Select
+            id="select"
+            name="select"
+            placeholder="Selecione um vinculo"
+            options={optionsBond}
+            value={bond}
+            onChange={({ optionsBond }) => setbond(optionsBond)}
           />
         </FormField>
         <Box direction="row" style={{ marginTop: 30 }} gap="medium">
