@@ -1,36 +1,32 @@
 import React, { useState } from 'react';
 import { Button, FormField, Form, TextInput, Box, Select, RangeInput } from 'grommet';
 import { useDispatch } from 'react-redux';
-import { SET_ERROR } from '../../store/reducers/types';
+import { SET_GIFTED } from '../../store/reducers/types';
+import { useHistory } from 'react-router-dom';
+
 //styled components
-import { Container, BigText } from './styled.gifted';
+import { Container, BigText } from './styled';
 
 function Gifted() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const optionsGender = ['Feminino', 'Masculino', 'lgbt+', 'Isso realmente importa?'];
   const optionsBond = ['Amigo(a)', 'Primo(a)', 'Namorado(a)', 'Mãe', 'Pai', 'Conhecido'];
   const [age, setAge] = useState(50);
-  const [name, setName] = useState('');
-  const [gender, setGender] = useState('');
-  const [bond, setbond] = useState('');
+  const [name, setName] = useState();
+  const [gender, setGender] = useState();
+  const [bond, setbond] = useState();
 
   function submitGiftedData() {
     let gifted = {
       name,
       age,
       gender,
+      bond,
     };
 
-    //TODO Dispatch gifted
-    let reducerError = {
-      page: 'gifted',
-      error: {
-        message: 'error',
-      },
-    };
-
-    dispatch({ type: SET_ERROR, payload: reducerError });
-    console.log(gifted);
+    dispatch({ type: SET_GIFTED, payload: gifted });
+    history.push('/spend');
   }
 
   return (
@@ -60,17 +56,15 @@ function Gifted() {
             placeholder="Selecione um genero"
             options={optionsGender}
             value={gender}
-            onChange={({ optionsGender }) => setGender(optionsGender)}
+            onChange={({ value }) => setGender(value)}
           />
         </FormField>
         <FormField name="gender" label="O que essa pessoa é para você?">
           <Select
-            id="select"
-            name="select"
             placeholder="Selecione um vinculo"
             options={optionsBond}
             value={bond}
-            onChange={({ optionsBond }) => setbond(optionsBond)}
+            onChange={({ value }) => setbond(value)}
           />
         </FormField>
         <Box direction="row" style={{ marginTop: 30 }} gap="medium">

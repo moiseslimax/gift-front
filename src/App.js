@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import configureStore from './store';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Gifted from './containers/Gifted';
+import Spend from './containers/Spend';
 
 const store = configureStore();
 
@@ -13,8 +14,8 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route path="/test">
-            <Test />
+          <Route path="/spend">
+            <Spend />
           </Route>
           <Route path="/gifted">
             <Gifted />

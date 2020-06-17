@@ -1,8 +1,8 @@
 import { SET_ERROR } from './types';
 
-const INITIAL_GIFTED_STATE = { page: '', errors: {} };
+const INITIAL_STATE = { page: '', errors: {} };
 
-export default (state = INITIAL_GIFTED_STATE, action) => {
+export default (state = INITIAL_STATE, action) => {
   console.log('reducer', action);
   switch (action.type) {
     case SET_ERROR:

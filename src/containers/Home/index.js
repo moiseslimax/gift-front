@@ -3,7 +3,7 @@ import { Button } from 'grommet';
 import { useHistory } from 'react-router-dom';
 
 //styled components
-import { BigText, Container } from './styled.home';
+import { BigText, Container } from './styled';
 
 function Home() {
   const history = useHistory();
