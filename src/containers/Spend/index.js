@@ -6,16 +6,16 @@ import { useDispatch, useSelector } from 'react-redux';
 
 //styled components
 import { BigText, Container, MoneyInput, SelectableBox, Boxes, BoxContent } from './styled';
+import { SET_SPENDANDSTYLE } from '../../store/reducers/types';
 
 function Spend() {
-  // const history = useHistory();
+  const history = useHistory();
+  const dispatch = useDispatch();
   let giftStyles = ['Especial', 'Útil', 'Romantico', 'Indiferente', 'Lembrança'];
   let gifted = useSelector((state) => state.gifted);
   const [spendValue, setSpendValue] = useState(100);
-  const [giftStyle, setGiftStyle] = useState('');
-  // if (!gifted.name) {
-  //   history.push('/home');
-  // }
+  const [giftStyleSelected, setGiftStyleSelected] = useState();
+
   const choiseBox = () => {
     let events = [
       {
@@ -46,25 +46,41 @@ function Spend() {
     ];
 
     return events.map((event) => {
+      let selectedStyle = {
+        backgroundColor: giftStyleSelected == event.id && 'rgb(83, 83, 138)'
+      }
+
+
       return (
-        <SelectableBox>
-          <BoxContent>
+        <SelectableBox style={selectedStyle} onClick={() => setGiftStyleSelected(event.id)}>
+          <BoxContent >
             {event.icon}
             <br />
-            <span style={{ opacity: 0.7 }}>{event.name}</span>
+            
+            <span style={{opacity: 0.7}}>{event.name}</span>
           </BoxContent>
         </SelectableBox>
       );
     });
   };
 
+  function submitSpendData() {
+    let spendData = {
+     spendValue,
+     giftStyleSelected
+    };
+
+    dispatch({ type: SET_SPENDANDSTYLE, payload: spendData });
+    history.push('/gift-list');
+  }
+
   return (
     <Container>
       <BigText>
-        Então, quanto vc quer gastar e qual tipo de presente vc acha que
+        Então, quanto vc quer gastar e qual tipo de presente vc acha que 
         {gifted.name || 'Teste Nome'} vai gostar?
       </BigText>
-      <Form style={{ margin: 25 }} onSubmit>
+      <Form style={{ margin: 25 }} onSubmit={() => submitSpendData()}>
         <FormField name="age" label="Valor médio a gastar" style={{ marginTop: 40 }}>
           <MoneyInput>R$ {spendValue}</MoneyInput>
           <RangeInput
@@ -76,7 +92,7 @@ function Spend() {
           />
         </FormField>
         <FormField
-          name="gender"
+          name="gift-style"
           label="Qual vai ser o estilo do presente?"
           style={{ marginTop: 30 }}
         >
