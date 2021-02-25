@@ -67,7 +67,7 @@ function GiftList() {
             
             <span style={{opacity: 0.7}}>{event.name}</span>
             <br />
-            <span style={{opacity: 0.7, fontSize: 17}}>R$ {event.mediumValue}</span>
+            <span style={{opacity: 0.8, fontSize: 17}}>R$ {event.mediumValue}</span>
           </BoxContent>
         </SelectableBox>
       );
