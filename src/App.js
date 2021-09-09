@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Gifted from './containers/Gifted';
 import Spend from './containers/Spend';
 import GiftList from './containers/GiftList';
+import WhereToBuy from './containers/WhereToBuy';
 
 const store = configureStore();
 
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route path="/gift-list">
             <GiftList />
+          </Route>
+          <Route path="/where-to-buy">
+            <WhereToBuy />
           </Route>
           <Route path="/">
             <Home />

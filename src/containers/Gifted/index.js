@@ -25,7 +25,7 @@ function Gifted() {
       bond,
     };
 
-    dispatch({ type: SET_GIFTED, payload: gifted });
+    dispatch({ type: SET_GIFTED, payload: {gifted} });
     history.push('/spend');
   }
 

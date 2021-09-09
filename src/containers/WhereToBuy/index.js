@@ -8,7 +8,7 @@ import { Star } from 'grommet-icons';
 import { BigText, Container, MoneyInput, SelectableBox, Boxes, BoxContent } from './styled';
 import { SET_GIFT_TYPE } from '../../store/reducers/types';
 
-function GiftList() {
+function WhereToBuy() {
   const history = useHistory();
   const dispatch = useDispatch();
   const [giftStyleSelected, setGiftStyleSelected] = useState();
@@ -81,21 +81,15 @@ function GiftList() {
     const payload = { giftTypeId: giftStyleSelected };
     console.log(payload)
     dispatch({ type: SET_GIFT_TYPE, payload });
-    history.push("/where-to-buy")
   };
 
   return (
     <Container>
       <BigText>
-        Filtramos os seguintes presentes que se encaixam com seu filtro, qual deles vc quer dar?
-        (Lembrando que já está na ordem que a gente acha mais interessante)
+        Bom, depois que vc decidiu o presente, vamos as compras.
       </BigText>
-      <Boxes style={{ marginTop: 50 }}>{choiseBox()}</Boxes>
-      <Box direction="row" style={{ margin: 30, display: 'flex' }} gap="medium">
-        <Button type="submit" onClick={() => submit()} primary label="Proximo passo!" />
-      </Box>
     </Container>
   );
 }
 
-export default GiftList;
+export default WhereToBuy;
